@@ -5,17 +5,22 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <title>Testing Tappy Library</title>
         <meta name="description" content="">
-        <meta name="viewport" content="width=device-width">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
         
         <style>
 /*   set the color of first box*/
-            div { background-color: red;
+            #gdiv { background-color: #3bff00;
                 width: 90px;
                 height: 90px;
 /*
                 font-size: 8em;
                     color: red;
 */
+            }
+            
+            #dummy { background-color: #ff0000;
+            
             }
             
         </style>
@@ -29,12 +34,54 @@
 <!--
         Tap the box, change the color. Tap it again and the color changes back
 -->
-        <div id="g">&nbsp;</div>
+        <div id="gdiv">&nbsp;</div>
+        <div id="dummy" style="display:none;"></div>
+       
+        <script type="text/javascript">
+            
+             $(document).ready(function(){
+                 alert("Hey where is tappy tap?");
+                 $("#gdiv").bind( "tap", function(){
+                     alert("tappy tap");
+//                    if($('#gdiv').css('background-color') === $('#dummy').css('background-color')) {
+//                 $("#gdiv").css("background-color", "#0000ff");
+//                }else{
+//                   $("#gdiv").css("background-color", "#ff0000"); 
+                }});
+             });
+        </script>
         
+<!--
+        <script type="text/javascript">
+            
+             $(document).ready(function(){
         
+                $("div").click(function(){
+                    var color1 = "#0000ff";
+                    var color2 = "#ff0000";
+                    
+                    var currentColor = $(this).css("background-color");
+                    if (currentColor == color1) {
+                    alert("color is same");
+                        $("div").css("background-color", color2);
+//                    alert("currentColor = " + currentColor);
+                    }else{
+                       alert("color is diff");
+                    $("div").css("background-color", color1);
+                }
+                        
+                    
+                });
+                 
+            });
+        </script>
+-->
+        
+<!--
         <script>
             $("div").bind( "tap", function( e ){
                 var currentColor = $(this).css("background-color");
+                alert("currentColor = " + currentColor);
                 if (currentColor == "red") {
                     $("div").css("background-color", "blue");
                 }else{
@@ -46,5 +93,6 @@
             
 		
 	</script>
+-->
     </body>
 </html>
