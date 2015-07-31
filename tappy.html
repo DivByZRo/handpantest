@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Testing Tappy Library</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
+        
+        <style>
+/*   set the color of first box*/
+            div { background-color: red;
+                width: 90px;
+                height: 90px;
+/*
+                font-size: 8em;
+                    color: red;
+*/
+            }
+            
+        </style>
+<!--        Load tappy and jQuery -->
+            
+        <script type="text/javascript" src="jquery-2.1.4.js"></script>
+        <script src="tappy.js"></script>
+
+    </head>
+    <body>
+<!--
+        Tap the box, change the color. Tap it again and the color changes back
+-->
+        <div id="g">&nbsp;</div>
+        
+        
+        <script>
+            $("div").bind( "tap", function( e ){
+                var currentColor = $(this).css("background-color");
+                if (currentColor == "red") {
+                    $("div").css("background-color", "blue");
+                }else{
+                    $("div").css("background-color", "red");
+                }
+            
+            });
+            
+            
+		
+	</script>
+    </body>
+</html>

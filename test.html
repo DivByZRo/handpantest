@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+
+    <title>StackOverflow Touch Test </title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+  
+<style>
+    
+            body
+        {
+        background-image:url('http://www.thedigitaltrekker.com/wp-content/uploads/2012/06/Vbg.dark_-250x180.jpg');
+        background-repeat:repeat;
+        }
+
+        html, body {
+            height: 100%;
+            color: white
+          }
+          #table-1 {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            vertical-align: middle;
+          }
+          #table-1 img {
+            display: block;
+            margin: 0 auto;
+          }
+
+           #img {
+        max-width: 100%;
+            height: auto;
+            width: auto\9; 
+            cursor: pointer;
+            }
+
+        #png1 {
+            position:relative;
+            bottom:50px;
+            left: -20%;
+            z-index:1;
+            max-width: 100%;
+            height: auto;
+            width: auto\9; 
+
+        }
+    
+    </style>
+
+    <script type="text/javascript" src="jquery-2.1.4.js"></script>
+
+    <script>
+        var url1 = "http://watkinsfilm.com/wp-content/uploads/2012/09/19mm.jpg";
+        var url2 = "http://watkinsfilm.com/wp-content/uploads/2012/09/200mm.jpg";
+
+        // preload from original code
+        var img1 = new Image();
+        img1.src = url1;
+
+        var img2 = new Image();
+        img2.src = url2;
+
+        // bind the click and touchstart events
+        $("#img").on("click", function(e){
+            alert(Hey!);
+                  exit;
+            if (this.src == url1) {
+                this.src = url2;
+            }
+            else if (this.src == url2) {
+                this.src = url1;
+            } 
+
+            // When touch event fires, this is needed to prevent the click
+            // event from firing as well as @RyanWheale noted in the comments.
+            e.preventDefault(); 
+        });
+    </script>
+    
+    </head>
+<body>
+   <div>
+   <table id="table-1" >
+   <tr><td>
+      <img id="img" src="http://watkinsfilm.com/wp-content/uploads/2012/09/19mm.jpg" name="pic"/>
+       <img id="png1" src="http://www.thedigitaltrekker.com/wp-content/uploads/2012/03/logo-6smA.png"/>
+Click on the image above to toggle between 19mm and 200mm <br>
+   </td></tr>
+   </table>
+</div>
+    
+    
+</body>
+</html>
