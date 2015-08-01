@@ -1,12 +1,12 @@
 
 
 <!DOCTYPE html>
-<html land=en>
+<html>
 	<head>
 		<title>Very Basic Virtual Synth Pad Demonstration</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
 
-		<link href='http://fonts.googleapis.com/css?family=Fira+Mono:400,700' rel='stylesheet' type='text/css'>
+		<link href="http://fonts.googleapis.com/css?family=Fira+Mono:400,700" rel="stylesheet" type="text/css">
 		<style>
 		html, body { margin: 0; font-family: 'Fira Mono', 'sans'; background: #f3f3f3; }
 	header { margin: 0; padding: 0 2em; background: #3a3a3a; color: rgb(173,173,173);}
@@ -19,7 +19,7 @@
 		height: 10em; 
 		margin-bottom: 1em;
 		display: inline-block; 
-		background: #a5fc3f; 
+		background: #3fc2fc; 
 		box-shadow: rgba(0, 0, 0, 0.0980392) -6px 6px 0px 0px inset;
 	}
 	#sp div:nth-child(odd) { margin-right: 1em; }
@@ -59,12 +59,12 @@
 			<div data-pad="pad1">
 				<h2>TL Control</h2>
 				<h3>top left pad</h3>
-				<button type="button" class="loop-button" data-toggle-text="End Loop" value=false>Loop</button>
-				<button type="button" class="reverb-button" data-toggle-text="No Rvrb" value=false>Reverb</button>
-				<button type="button" class="filter-button" data-toggle-text="No Fltr" value=false>Filter</button>
-				<lable class="filter-group faded" for="frequency1">Frequency:</lable>
+				<button type="button" class="loop-button" data-toggle-text="End Loop" value="false">Loop</button>
+				<button type="button" class="reverb-button" data-toggle-text="No Rvrb" value="false">Reverb</button>
+				<button type="button" class="filter-button" data-toggle-text="No Fltr" value="false">Filter</button>
+				<label class="filter-group faded" for="frequency1">Frequency:</label>
 				<input class="filter-group faded" type="range" min="0" max="10000" step="1" value="350" data-control="fq" name="frequency1">
-				<lable class="filter-group faded" for="quality1">Quality:</lable>
+				<label class="filter-group faded" for="quality1">Quality:</label>
 				<input class="filter-group faded" type="range" min="0.0001" max="1000" step="0.0001" value="500" data-control="q" name="quality1">
 				<label for"volume 1">Volume</label>
 				<input type="range" min="0" max="5" step="0.1" value="1" data-control="gain" name="volume1">
@@ -75,11 +75,11 @@
 				<button type="button" class="loop-button" data-toggle-text="End Loop" value=false>Loop</button>
 				<button type="button" class="reverb-button" data-toggle-text="No Rvrb" value=false>Reverb</button>
 				<button type="button" class="filter-button" data-toggle-text="No Fltr" value=false>Filter</button>
-				<lable class="filter-group faded" for="frequency2">Frequency:</lable>
+				<label class="filter-group faded" for="frequency2">Frequency:</label>
 				<input class="filter-group faded" type="range" min="0" max="10000" step="1" value="350" data-control="fq" name="frequency2">
-				<lable class="filter-group faded" for="quality2">Quality:</lable>
+				<label class="filter-group faded" for="quality2">Quality:</label>
 				<input class="filter-group faded" type="range" min="0.0001" max="1000" step="0.0001" value="500" data-control="q" name="quality2">
-				<label for"volume 2">Volume</label>
+				<label for "volume 2" >Volume</label>
 				<input type="range" min="0" max="5" step="0.1" value="1" data-control="gain" name="volume2">
 			</div>
 			<div data-pad="pad3">
@@ -88,9 +88,9 @@
 				<button type="button" class="loop-button" data-toggle-text="End Loop" value=false>Loop</button>
 				<button type="button" class="reverb-button" data-toggle-text="No Rvrb" value=false>Reverb</button>
 				<button type="button" class="filter-button" data-toggle-text="No Fltr" value=false>Filter</button>
-				<lable class="filter-group faded" for="frequency3">Frequency:</lable>
+				<label class="filter-group faded" for="frequency3">Frequency:</label>
 				<input class="filter-group faded" type="range" min="0" max="10000" step="1" value="350" data-control="fq" name="frequency3">
-				<lable class="filter-group faded" for="quality3">Quality:</lable>
+				<label class="filter-group faded" for="quality3">Quality:</label>
 				<input class="filter-group faded" type="range" min="0.0001" max="1000" step="0.0001" value="500" data-control="q" name="quality3">
 				<label for"volume 3">Volume</label>
 				<input type="range" min="0" max="5" step="0.1" value="1" data-control="gain" name="volume3">
@@ -101,9 +101,9 @@
 				<button type="button" class="loop-button" data-toggle-text="End Loop" value=false>Loop</button>
 				<button type="button" class="reverb-button" data-toggle-text="No Rvrb" value=false>Reverb</button>
 				<button type="button" class="filter-button" data-toggle-text="No Fltr" value=false>Filter</button>
-				<lable class="filter-group faded" for="frequency4">Frequency:</lable>
+				<label class="filter-group faded" for="frequency4">Frequency:</label>
 				<input class="filter-group faded" type="range" min="0" max="10000" step="1" value="350" data-control="fq" name="frequency4">
-				<lable class="filter-group faded" for="quality4">Quality:</lable>
+				<label class="filter-group faded" for="quality4">Quality:</label>
 				<input class="filter-group faded" type="range" min="0.0001" max="1000" step="0.0001" value="500" data-control="q" name="quality4">
 				<label for"volume 4">Volume</label>
 				<input type="range" min="0" max="5" step="0.1" value="1" data-control="gain" name="volume4">
@@ -125,7 +125,7 @@
 //		        this.play();
 //		    });
             
-             $('#sp div').on('touchstart', function() {
+             $('#sp div').on('click touchstart', function() {
 		       alert("touchstart fired");
                  this.play();
 		    });
