@@ -19,7 +19,7 @@
 		height: 10em; 
 		margin-bottom: 1em;
 		display: inline-block; 
-		background: #3f46fc; 
+		background: #a5fc3f; 
 		box-shadow: rgba(0, 0, 0, 0.0980392) -6px 6px 0px 0px inset;
 	}
 	#sp div:nth-child(odd) { margin-right: 1em; }
@@ -118,6 +118,7 @@
 		$(function() {
 		    $('#sp div').each(function() {
 		        addAudioProperties(this);
+                alert("each func done");
 		    });
 
 //		    $('#sp div').touchstart(function() {
@@ -125,7 +126,8 @@
 //		    });
             
              $('#sp div').on('touchstart', function() {
-		        this.play();
+		       alert("touchstart fired");
+                 this.play();
 		    });
 
 		    $('#cp input').change(function() {
