@@ -19,7 +19,7 @@
 		height: 10em; 
 		margin-bottom: 1em;
 		display: inline-block; 
-		background: #9dfc3f; 
+		background: #a36d6d; 
 		box-shadow: rgba(0, 0, 0, 0.0980392) -6px 6px 0px 0px inset;
 	}
 	#sp div:nth-child(odd) { margin-right: 1em; }
@@ -114,7 +114,7 @@
 		<script>
 		var context = new AudioContext(),
 		    irHall = new reverbObject('http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409273irHall.ogg');
-
+ 
 		$(function() {
 		    $('#sp div').each(function() {
 		        addAudioProperties(this);
@@ -126,8 +126,7 @@
 //		    });
             
              $('#sp div').on('click touchstart', function() {
-		       alert("touchstart fired");
-                 exit;
+		      
                  this.play();
 		    });
 
@@ -149,7 +148,7 @@
 		        } 
 		    });
 
-		    $('#cp button').touchstart(function() {
+		    $('#cp button').click(function() {
 		        var v = $(this).parent().data('pad'),
 		            toggle = $(this).text(),
 		            pad = $('#' + v)[0];
@@ -213,12 +212,15 @@
 		            this.convolver.buffer = irHall.buffer;
 		            this.volume.connect(this.convolver);
 		            this.convolver.connect(context.destination);
+                    this.noteon(0);
 		        } else if (this.convolver) {
 		            this.volume.disconnect(0);
 		            this.convolver.disconnect(0);
 		            this.volume.connect(context.destination);
+                    this.noteon(0);
 		        } else {
 		            this.volume.connect(context.destination);
+                    this.noteon(0);
 		        }
 		        
 		        if(this.filter === true) {
@@ -231,10 +233,12 @@
 		                this.convolver.disconnect(0);
 		                this.convolver.connect(this.biquad);
 		                this.biquad.connect(context.destination);
+                        this.noteon(0);
 		            } else {
 		                this.volume.disconnect(0);
 		                this.volume.connect(this.biquad);
 		                this.biquad.connect(context.destination);
+                        this.noteon(0);
 		            }
 		        } else {
 		            if(this.biquad) {
@@ -242,10 +246,12 @@
 		                    this.biquad.disconnect(0);
 		                    this.convolver.disconnect(0);
 		                    this.convolver.connect(context.destination);
+                            this.noteon(0);
 		                } else {
 		                    this.biquad.disconnect(0);
 		                    this.volume.disconnect(0);
 		                    this.volume.connect(context.destination);
+                            this.noteon(0);
 		                }
 		            }
 		        }
