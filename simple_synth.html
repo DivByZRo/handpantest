@@ -19,7 +19,7 @@
 		height: 10em; 
 		margin-bottom: 1em;
 		display: inline-block; 
-		background: #a36d6d; 
+		background: #6da394; 
 		box-shadow: rgba(0, 0, 0, 0.0980392) -6px 6px 0px 0px inset;
 	}
 	#sp div:nth-child(odd) { margin-right: 1em; }
@@ -49,7 +49,12 @@
 	</head>
 	<body>
 		<header><h1>v.b.v.s.p.</h1></header>
-		<section id="sp">
+       
+        <section id="turnmuteoff">
+        <button id="start" >click to unmute</button>
+        </section>
+		
+        <section id="sp">
 			<div id="pad1"  data-sound="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409274kick.wav"></div>
 			<div id="pad2"  data-sound="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409275snare.wav"></div>
 			<div id="pad3"  data-sound="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409276tin.wav"></div>
@@ -112,10 +117,34 @@
 		<p class="p">Demo by Armando Roggio. <a href="html5-web-audio-api-tutorial-building-virtual-synth-pad">See article</a>.</p>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 		<script>
+            var myContext = new AudioContext() ||  new webkitAudioContext();
+            
 		var context = new AudioContext(),
 		    irHall = new reverbObject('http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409273irHall.ogg');
  
 		$(function() {
+            
+//            my button code
+            var myRequest = new XMLHttpRequest();
+			myRequest.open("GET", "http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409274kick.wav", true);
+			myRequest.responseType = "arraybuffer";
+			myRequest.onload = function () {
+				
+				myContext.decodeAudioData(request.response, function (buffer_) {
+					
+					buffer = buffer_;});
+			};
+			request.send();
+            
+            
+            var myBuffer = null;
+            $('start').click(function(){
+               var mySource = myContext.createBufferSource();
+			mySource.buffer = myBuffer;
+			mySource.connect(myContext.destination);
+			mysource.noteOn(0); 
+            });
+            
 		    $('#sp div').each(function() {
 		        addAudioProperties(this);
                
@@ -212,15 +241,15 @@
 		            this.convolver.buffer = irHall.buffer;
 		            this.volume.connect(this.convolver);
 		            this.convolver.connect(context.destination);
-                    this.noteon(0);
+                   
 		        } else if (this.convolver) {
 		            this.volume.disconnect(0);
 		            this.convolver.disconnect(0);
 		            this.volume.connect(context.destination);
-                    this.noteon(0);
+                   
 		        } else {
 		            this.volume.connect(context.destination);
-                    this.noteon(0);
+                   
 		        }
 		        
 		        if(this.filter === true) {
@@ -233,12 +262,12 @@
 		                this.convolver.disconnect(0);
 		                this.convolver.connect(this.biquad);
 		                this.biquad.connect(context.destination);
-                        this.noteon(0);
+                       
 		            } else {
 		                this.volume.disconnect(0);
 		                this.volume.connect(this.biquad);
 		                this.biquad.connect(context.destination);
-                        this.noteon(0);
+                       
 		            }
 		        } else {
 		            if(this.biquad) {
@@ -246,12 +275,12 @@
 		                    this.biquad.disconnect(0);
 		                    this.convolver.disconnect(0);
 		                    this.convolver.connect(context.destination);
-                            this.noteon(0);
+                           
 		                } else {
 		                    this.biquad.disconnect(0);
 		                    this.volume.disconnect(0);
 		                    this.volume.connect(context.destination);
-                            this.noteon(0);
+                           
 		                }
 		            }
 		        }
