@@ -7,7 +7,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
         <style>
-            #noteA3 { background-color: aqua;
+            #sp div { background-color: aqua;
                         width: 40px;
                         height: 40px;
                         margin: 50px 40px;
@@ -17,15 +17,20 @@
         <script type="text/javascript" src="jquery-2.1.4.js"></script>
     </head>
     <body>
-        <div id="noteA3">&nbsp;</div>
-        
+        <section id="sp">
+        <div>&nbsp;</div>
+        </section>
     </body>
     
     <script>
-        $(document).ready( function(){ $('div').on('touchstart', function(){alert("touchstart works");});
+        $(document).ready( function(){ $('#sp div').on('touchstart', function(){
+
+            alert("touchstart works");});
                                          }
            
         );
+        
+         
     
     </script>
     
