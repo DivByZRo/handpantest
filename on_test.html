@@ -6,31 +6,153 @@
         <title>on_test</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-        <style>
-            #sp div { background-color: #ba00ff;
-                        width: 40px;
-                        height: 40px;
-                        margin: 50px 40px;
-            }
+       <style>
+		html, body { margin: 0; font-family: 'Fira Mono', 'sans'; background: #f3f3f3; }
+        header { margin: 0; padding: 0 2em; background: #3a3a3a; color: rgb(173,173,173);}
+        header h1 { margin: 0;}
+
+	/* synth pad section */
+	#sp { width: 22.75em; height: 25em; margin: 0; padding: 2em; float: left; }
+	#sp div { 
+		width: 10em; 
+		height: 10em; 
+		margin-bottom: 1em;
+		display: inline-block; 
+		background: #9dfc3f; 
+		box-shadow: rgba(0, 0, 0, 0.0980392) -6px 6px 0px 0px inset;
+	}
+	#sp div:nth-child(odd) { margin-right: 1em; }
+	#sp div:active { background: #248aaf; }
         
         </style>
-        <script type="text/javascript" src="jquery-2.1.4.js"></script>
+        
     </head>
     <body>
-        <section id="sp">
-        <div>&nbsp;</div>
-        </section>
+       <section id="sp">
+			<div id="pad1" data-sound="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409274kick.wav"></div>
+<!--
+			<div id="pad2"  data-sound="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409275snare.wav"></div>
+			<div id="pad3"  data-sound="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409276tin.wav"></div>
+			<div id="pad4"  data-sound="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409278hat.wav"></div>
+-->
+		</section>
     </body>
-    
+    <script type="text/javascript" src="jquery-2.1.4.js"></script>
     <script>
-        $(document).ready( function(){ $('#sp div').on('touchstart', function(){
+//        $(document).ready( function(){ $('#sp div').on('click', function(){
+//
+//            alert("touchstart works");});
+//                                         }
+//                          
+//                          );
+          
+		var context = new AudioContext();
+		   
 
-            alert("touchstart works");});
-                                         }
+		$(function() {
+		    $('#sp div').each(function() {
+		        addAudioProperties(this);
+               
+		    });
+
+//		    $('#sp div').click(function() {
+//		       
+//                 this.play();
+//		    });
+            
+             $('#sp div').on('click touchstart', function() {
+//		      alert("click touchstart");
+                 this.play();
+		    });
+              
            
-        );
+        });
         
-         
+//        function reverbObject (url) {
+//		    this.source = url;
+//		    loadAudio(this, url);
+//		}
+        
+        function loadAudio(object, url) {
+		    var request = new XMLHttpRequest();
+		    request.open('GET', url, true);
+		    request.responseType = 'arraybuffer';
+
+		    request.onload = function() {
+		        context.decodeAudioData(request.response, function(buffer) {
+		            object.buffer = buffer;
+		        });
+		    }
+		    request.send();
+		}
+        
+        function addAudioProperties(object) {
+		    object.name = object.id;
+		    object.source = $(object).data('sound');
+		    loadAudio(object, object.source);
+		    object.volume = context.createGain();
+		    object.loop = false;
+		    object.reverb = false;
+		    object.filter = false;
+		    object.fqValue = 350;
+		    object.qValue = 500;
+		    object.play = function () {
+		        var s = context.createBufferSource();
+		        s.buffer = object.buffer;
+		        s.connect(object.volume);
+                
+               
+		        
+		        if (this.reverb === true) {
+		            this.convolver = context.createConvolver();
+		            this.convolver.buffer = irHall.buffer;
+		            this.volume.connect(this.convolver);
+		            this.convolver.connect(context.destination);
+		        } else if (this.convolver) {
+		            this.volume.disconnect(0);
+		            this.convolver.disconnect(0);
+		            this.volume.connect(context.destination);
+		        } else {
+		            this.volume.connect(context.destination);
+		        }
+		        
+		        if(this.filter === true) {
+		            this.biquad = context.createBiquadFilter();
+		            this.biquad.type = this.biquad.LOWPASS;
+		            this.biquad.frequency.value = this.fqValue;
+		            this.biquad.Q.value = this.qValue;
+
+		            if(this.reverb === true) {
+		                this.convolver.disconnect(0);
+		                this.convolver.connect(this.biquad);
+		                this.biquad.connect(context.destination);
+		            } else {
+		                this.volume.disconnect(0);
+		                this.volume.connect(this.biquad);
+		                this.biquad.connect(context.destination);
+		            }
+		        } else {
+		            if(this.biquad) {
+		                if(this.reverb === true) {
+		                    this.biquad.disconnect(0);
+		                    this.convolver.disconnect(0);
+		                    this.convolver.connect(context.destination);
+		                } else {
+		                    this.biquad.disconnect(0);
+		                    this.volume.disconnect(0);
+		                    this.volume.connect(context.destination);
+		                }
+		            }
+		        }
+		        s.loop = object.loop;
+		        s.start(0);
+		        object.s = s;
+		    }
+
+		    object.stop = function () {
+		        if(object.s) object.s.stop();
+		    }
+		}
     
     </script>
     
