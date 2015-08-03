@@ -18,13 +18,13 @@
 			jQuery("#status2").append("<br/>" + msg);
 		};
         
-		window.onerror1 = function(errorMsg, url, lineNumber) {
+		window.onerror = function(errorMsg, url, lineNumber) {
 			addStatus1("JAVASCRIPT ERROR: " + errorMsg + " (" + url + ", line " + lineNumber + ")");
 		};
         
-		window.onerror2 = function(errorMsg, url, lineNumber) {
-			addStatus2("JAVASCRIPT ERROR: " + errorMsg + " (" + url + ", line " + lineNumber + ")");
-		};
+//		window.onerror2 = function(errorMsg, url, lineNumber) {
+//			addStatus2("JAVASCRIPT ERROR: " + errorMsg + " (" + url + ", line " + lineNumber + ")");
+//		};
         
         
 		function decodeError1() {
@@ -84,7 +84,7 @@
 				context.decodeAudioData(request.response, function (buffer_) {
 					addStatus1("Finished decoding audio");
 					buffer = buffer_;
-				}, decodeError);
+				}, decodeError1);
 			};
 			request.send();
             }
@@ -98,7 +98,7 @@
 				context.decodeAudioData(request.response, function (buffer_) {
 					addStatus2("Finished decoding audio");
 					buffer = buffer_;
-				}, decodeError);
+				}, decodeError2);
 			};
 			request.send();
             }
