@@ -37,9 +37,11 @@
         
         
 		function playSound1(when_) {
-			if (!buffer)
+			requestSound1();
+            
+            if (!buffer)
 				return;
-//			requestSound1();
+			
 			var source = context.createBufferSource();
 			source.buffer = buffer;
 			source.connect(context.destination);
@@ -75,7 +77,7 @@
 			}
 			
 			// AJAX request sound
-//            function requestSound1(){
+            function requestSound1(){
 			var request = new XMLHttpRequest();
 			request.open("GET", "8notesDiatoAmV4A3.mp3", true);
 			request.responseType = "arraybuffer";
@@ -87,7 +89,7 @@
 				}, decodeError1);
 			};
 			request.send();
-//            }
+            }
             
 //            function requestSound2(){
 //            var request = new XMLHttpRequest();
