@@ -3,6 +3,8 @@
 <html>
 <head>
 	<title>iOS 6 Web Audio Scirra test (v3)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+
 	<script src="jquery-2.1.4.js"></script>
 	
 	<script>
@@ -78,31 +80,31 @@
 			
 			// AJAX request sound
             
-			var request = new XMLHttpRequest();
-			request.open("GET", "8notesDiatoAmV4A3.mp3", true);
-			request.responseType = "arraybuffer";
-			request.onload = function () {
+			var request1 = new XMLHttpRequest();
+			request1.open("GET", "8notesDiatoAmV4A3.mp3", true);
+			request1.responseType = "arraybuffer";
+			request1.onload = function () {
 				addStatus1("A3.mp3 loaded, decoding...");
-				context.decodeAudioData(request.response, function (buffer_) {
+				context.decodeAudioData(request1.response, function (buffer_) {
 					addStatus1("Finished decoding audio");
 					buffer1 = buffer_;
 				}, decodeError1);
 			};
-			request.send();
+			request1.send();
             
             
             
-            var request = new XMLHttpRequest();
-			request.open("GET", "8notesDiatoAmV4A4.mp3", true);
-			request.responseType = "arraybuffer";
-			request.onload = function () {
+            var request2 = new XMLHttpRequest();
+			request2.open("GET", "8notesDiatoAmV4A4.mp3", true);
+			request2.responseType = "arraybuffer";
+			request2.onload = function () {
 				addStatus2("B3.mp3 loaded, decoding...");
-				context.decodeAudioData(request.response, function (buffer_) {
+				context.decodeAudioData(request2.response, function (buffer_) {
 					addStatus2("Finished decoding audio");
 					buffer2 = buffer_;
 				}, decodeError2);
 			};
-			request.send();
+			request2.send();
             
 			
 			jQuery("#play1").click(function() {
