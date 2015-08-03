@@ -37,7 +37,7 @@
         
         
 		function playSound1(when_) {
-			requestSound1();
+			
             
             if (!buffer1)
 				return;
@@ -51,7 +51,7 @@
         function playSound2(when_) {
 			if (!buffer2)
 				return;
-			requestSound2();
+			
 			var source = context.createBufferSource();
 			source.buffer = buffer2;
 			source.connect(context.destination);
@@ -127,6 +127,6 @@
     
     <button id="play2" data-sound="8notesDiatoAmV4B3.mp3">B3</button>
 	<p id="status2">Status:</p>
-    <p>test 5</p>
+    <p>test 6</p>
 </body>
 </html>
