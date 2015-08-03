@@ -8,7 +8,7 @@
 	<script>
 	(function () {
 		var context = null;
-		var buffer = null;
+		var buffer1 = null, buffer2 = null;
 		
 		function addStatus1(msg) {
 			jQuery("#status1").append("<br/>" + msg);
@@ -39,21 +39,21 @@
 		function playSound1(when_) {
 			requestSound1();
             
-            if (!buffer)
+            if (!buffer1)
 				return;
 			
 			var source = context.createBufferSource();
-			source.buffer = buffer;
+			source.buffer = buffer1;
 			source.connect(context.destination);
 			source.noteOn(when_);
 		};
 		
         function playSound2(when_) {
-			if (!buffer)
+			if (!buffer2)
 				return;
 			requestSound2();
 			var source = context.createBufferSource();
-			source.buffer = buffer;
+			source.buffer = buffer2;
 			source.connect(context.destination);
 			source.noteOn(when_);
 		};
@@ -77,7 +77,7 @@
 			}
 			
 			// AJAX request sound
-            function requestSound1(){
+//            function requestSound1(){
 			var request = new XMLHttpRequest();
 			request.open("GET", "8notesDiatoAmV4A3.mp3", true);
 			request.responseType = "arraybuffer";
@@ -85,11 +85,11 @@
 				addStatus1("A3.mp3 loaded, decoding...");
 				context.decodeAudioData(request.response, function (buffer_) {
 					addStatus1("Finished decoding audio");
-					buffer = buffer_;
+					buffer1 = buffer_;
 				}, decodeError1);
 			};
 			request.send();
-            }
+//            }
             
 //            function requestSound2(){
 //            var request = new XMLHttpRequest();
@@ -99,7 +99,7 @@
 //				addStatus2("B3.mp3 loaded, decoding...");
 //				context.decodeAudioData(request.response, function (buffer_) {
 //					addStatus2("Finished decoding audio");
-//					buffer = buffer_;
+//					buffer2 = buffer_;
 //				}, decodeError2);
 //			};
 //			request.send();
