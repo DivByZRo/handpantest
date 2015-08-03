@@ -107,13 +107,13 @@
 			request2.send();
             
 			
-			jQuery("#play1").click(function() {
+			jQuery("#play1").on("touchstart", function() {
 				//setTimeout(1000, function() {
 					playSound1(0);
 				//});
 			});
             
-            jQuery("#play2").click(function() {
+            jQuery("#play2").on("touchstart",function() {
 				//setTimeout(1000, function() {
 					playSound2(0);
 				//});
