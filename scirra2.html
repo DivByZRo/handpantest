@@ -39,7 +39,7 @@
 		function playSound1(when_) {
 			if (!buffer)
 				return;
-			requestSound1();
+//			requestSound1();
 			var source = context.createBufferSource();
 			source.buffer = buffer;
 			source.connect(context.destination);
@@ -75,7 +75,7 @@
 			}
 			
 			// AJAX request sound
-            function requestSound1(){
+//            function requestSound1(){
 			var request = new XMLHttpRequest();
 			request.open("GET", "8notesDiatoAmV4A3.mp3", true);
 			request.responseType = "arraybuffer";
@@ -87,7 +87,7 @@
 				}, decodeError1);
 			};
 			request.send();
-            }
+//            }
             
 //            function requestSound2(){
 //            var request = new XMLHttpRequest();
@@ -125,6 +125,6 @@
     
     <button id="play2" data-sound="8notesDiatoAmV4B3.mp3">B3</button>
 	<p id="status2">Status:</p>
-    <p>test 2</p>
+    <p>test 3</p>
 </body>
 </html>
