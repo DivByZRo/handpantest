@@ -54,7 +54,7 @@
 			request.open("GET", "8notesDiatoAmV4A3.mp3", true);
 			request.responseType = "arraybuffer";
 			request.onload = function () {
-				addStatus("sound.m4a loaded, decoding...");
+				addStatus("A3.mp3 loaded, decoding...");
 				context.decodeAudioData(request.response, function (buffer_) {
 					addStatus("Finished decoding audio");
 					buffer = buffer_;
@@ -62,7 +62,7 @@
 			};
 			request.send();
 			
-			jQuery("#play").click(function() {
+			jQuery("#play1").click(function() {
 				//setTimeout(1000, function() {
 					playSound(0);
 				//});
@@ -72,7 +72,7 @@
 	</script>
 </head>
 <body>
-	<button id="play">noteOn(0)</button>
+	<button id="play1">A3</button>
 	<p id="status">Status:</p>
 </body>
 </html>
