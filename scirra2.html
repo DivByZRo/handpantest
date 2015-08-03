@@ -89,19 +89,19 @@
 			request.send();
             }
             
-            function requestSound2(){
-            var request = new XMLHttpRequest();
-			request.open("GET", "8notesDiatoAmV4B3.mp3", true);
-			request.responseType = "arraybuffer";
-			request.onload = function () {
-				addStatus2("B3.mp3 loaded, decoding...");
-				context.decodeAudioData(request.response, function (buffer_) {
-					addStatus2("Finished decoding audio");
-					buffer = buffer_;
-				}, decodeError2);
-			};
-			request.send();
-            }
+//            function requestSound2(){
+//            var request = new XMLHttpRequest();
+//			request.open("GET", "8notesDiatoAmV4B3.mp3", true);
+//			request.responseType = "arraybuffer";
+//			request.onload = function () {
+//				addStatus2("B3.mp3 loaded, decoding...");
+//				context.decodeAudioData(request.response, function (buffer_) {
+//					addStatus2("Finished decoding audio");
+//					buffer = buffer_;
+//				}, decodeError2);
+//			};
+//			request.send();
+//            }
 			
 			jQuery("#play1").click(function() {
 				//setTimeout(1000, function() {
@@ -109,11 +109,11 @@
 				//});
 			});
             
-            jQuery("#play2").click(function() {
-				//setTimeout(1000, function() {
-					playSound2(0);
-				//});
-			});
+//            jQuery("#play2").click(function() {
+//				//setTimeout(1000, function() {
+//					playSound2(0);
+//				//});
+//			});
             
 		});
 	})();
@@ -125,6 +125,6 @@
     
     <button id="play2" data-sound="8notesDiatoAmV4B3.mp3">B3</button>
 	<p id="status2">Status:</p>
-    <p>test 1</p>
+    <p>test 2</p>
 </body>
 </html>
