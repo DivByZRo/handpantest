@@ -77,7 +77,7 @@
 			}
 			
 			// AJAX request sound
-//            function requestSound1(){
+            
 			var request = new XMLHttpRequest();
 			request.open("GET", "8notesDiatoAmV4A3.mp3", true);
 			request.responseType = "arraybuffer";
@@ -89,21 +89,21 @@
 				}, decodeError1);
 			};
 			request.send();
-//            }
             
-//            function requestSound2(){
-//            var request = new XMLHttpRequest();
-//			request.open("GET", "8notesDiatoAmV4B3.mp3", true);
-//			request.responseType = "arraybuffer";
-//			request.onload = function () {
-//				addStatus2("B3.mp3 loaded, decoding...");
-//				context.decodeAudioData(request.response, function (buffer_) {
-//					addStatus2("Finished decoding audio");
-//					buffer2 = buffer_;
-//				}, decodeError2);
-//			};
-//			request.send();
-//            }
+            
+            
+            var request = new XMLHttpRequest();
+			request.open("GET", "8notesDiatoAmV4B3.mp3", true);
+			request.responseType = "arraybuffer";
+			request.onload = function () {
+				addStatus2("B3.mp3 loaded, decoding...");
+				context.decodeAudioData(request.response, function (buffer_) {
+					addStatus2("Finished decoding audio");
+					buffer2 = buffer_;
+				}, decodeError2);
+			};
+			request.send();
+            
 			
 			jQuery("#play1").click(function() {
 				//setTimeout(1000, function() {
@@ -111,11 +111,11 @@
 				//});
 			});
             
-//            jQuery("#play2").click(function() {
-//				//setTimeout(1000, function() {
-//					playSound2(0);
-//				//});
-//			});
+            jQuery("#play2").click(function() {
+				//setTimeout(1000, function() {
+					playSound2(0);
+				//});
+			});
             
 		});
 	})();
@@ -127,6 +127,6 @@
     
     <button id="play2" data-sound="8notesDiatoAmV4B3.mp3">B3</button>
 	<p id="status2">Status:</p>
-    <p>test 6</p>
+    <p>test 7</p>
 </body>
 </html>
