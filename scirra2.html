@@ -10,69 +10,120 @@
 		var context = null;
 		var buffer = null;
 		
-		function addStatus(msg) {
-			jQuery("#status").append("<br/>" + msg);
+		function addStatus1(msg) {
+			jQuery("#status1").append("<br/>" + msg);
 		};
 		
-		window.onerror = function(errorMsg, url, lineNumber) {
-			addStatus("JAVASCRIPT ERROR: " + errorMsg + " (" + url + ", line " + lineNumber + ")");
+        function addStatus2(msg) {
+			jQuery("#status2").append("<br/>" + msg);
+		};
+        
+		window.onerror1 = function(errorMsg, url, lineNumber) {
+			addStatus1("JAVASCRIPT ERROR: " + errorMsg + " (" + url + ", line " + lineNumber + ")");
+		};
+        
+		window.onerror2 = function(errorMsg, url, lineNumber) {
+			addStatus2("JAVASCRIPT ERROR: " + errorMsg + " (" + url + ", line " + lineNumber + ")");
+		};
+        
+        
+		function decodeError1() {
+			addStatus1("Error in decodeAudioData");
 		};
 		
-		function decodeError() {
-			addStatus("Error in decodeAudioData");
+        function decodeError2() {
+			addStatus2("Error in decodeAudioData");
 		};
-		
-		function playSound(when_) {
+        
+        
+		function playSound1(when_) {
 			if (!buffer)
 				return;
-			
+			requestSound1();
 			var source = context.createBufferSource();
 			source.buffer = buffer;
 			source.connect(context.destination);
 			source.noteOn(when_);
 		};
 		
+        function playSound2(when_) {
+			if (!buffer)
+				return;
+			requestSound2();
+			var source = context.createBufferSource();
+			source.buffer = buffer;
+			source.connect(context.destination);
+			source.noteOn(when_);
+		};
+        
+        
 		jQuery(document).ready(function () {
 			if (typeof AudioContext !== "undefined")
 			{
 				context = new AudioContext();
-				addStatus("Created AudioContext");
+				addStatus1("Created AudioContext");
 			}
 			else if (typeof webkitAudioContext !== "undefined")
 			{
 				context = new webkitAudioContext();
-				addStatus("Created webkitAudioContext");
+				addStatus1("Created webkitAudioContext");
 			}
 			else
 			{
-				addStatus("Web Audio API does not appear to be supported");
+				addStatus1("Web Audio API does not appear to be supported");
 				return;
 			}
 			
-			// AJAX request sound.m4a
+			// AJAX request sound
+            function requestSound1(){
 			var request = new XMLHttpRequest();
 			request.open("GET", "8notesDiatoAmV4A3.mp3", true);
 			request.responseType = "arraybuffer";
 			request.onload = function () {
-				addStatus("A3.mp3 loaded, decoding...");
+				addStatus1("A3.mp3 loaded, decoding...");
 				context.decodeAudioData(request.response, function (buffer_) {
-					addStatus("Finished decoding audio");
+					addStatus1("Finished decoding audio");
 					buffer = buffer_;
 				}, decodeError);
 			};
 			request.send();
+            }
+            
+            function requestSound2(){
+            var request = new XMLHttpRequest();
+			request.open("GET", "8notesDiatoAmV4B3.mp3", true);
+			request.responseType = "arraybuffer";
+			request.onload = function () {
+				addStatus2("B3.mp3 loaded, decoding...");
+				context.decodeAudioData(request.response, function (buffer_) {
+					addStatus2("Finished decoding audio");
+					buffer = buffer_;
+				}, decodeError);
+			};
+			request.send();
+            }
 			
 			jQuery("#play1").click(function() {
 				//setTimeout(1000, function() {
-					playSound(0);
+					playSound1(0);
 				//});
 			});
+            
+            jQuery("#play2").click(function() {
+				//setTimeout(1000, function() {
+					playSound2(0);
+				//});
+			});
+            
 		});
 	})();
 	</script>
 </head>
 <body>
-	<button id="play1">A3</button>
-	<p id="status">Status:</p>
+	<button id="play1" data-sound="8notesDiatoAmV4A3.mp3">A3</button>
+	<p id="status1">Status:</p>
+    
+    <button id="play2" data-sound="8notesDiatoAmV4B3.mp3">B3</button>
+	<p id="status2">Status:</p>
 </body>
 </html>
