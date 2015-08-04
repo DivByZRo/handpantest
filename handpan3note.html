@@ -96,11 +96,7 @@
         
         
 		jQuery(document).ready(function () {
-			if (typeof AudioContext == "undefined")
-                {
-				addStatus1("Web Audio API does not appear to be supported");
-				return;}
-                else{
+			
 				context = new AudioContext() || new webkitAudioContext();
 				addStatus1("Created AudioContext");
                 }
