@@ -1,0 +1,188 @@
+
+<!doctype html>
+<html>
+<head>
+	<title>A minor Pentatonic</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <style>
+        
+        
+        
+        #notes { width: 1010px;
+                height: 660px;
+                border: 2px solid #ed9c9c;
+                background: #a07f7f url("images/6notes-play.png") no-repeat center center;
+                position: relative;
+            } 
+
+        
+        div { width: 90px;
+                height: 90px;
+                background-color: #b681eb;
+                margin: 10px 40px 10px;
+            display:  none;
+/*                display: block;*/
+/*                float: left;*/
+            }
+        
+        /*        A3*/
+        
+        #note1 {  position: absolute; 
+                top: 260px;
+                left: 430px;
+        }
+        
+        /*        A4*/
+        
+        #note6 { position: absolute;
+                top: 80px;
+                left: 440px;
+        }
+        
+        /*        B3*/
+        
+        #note2 { position: absolute;
+                top: 180px;
+                left: 250px;       
+        }
+        
+         /*        C4*/
+        
+        #note3 { position: absolute;
+                top: 410px;
+                left: 300px;  
+        }
+        
+          /*        F4*/
+        
+        #note5 { position: absolute;
+                top: 410px;
+                left: 560px;
+        }
+        
+         /*        E3*/
+        
+        #note4 { position: absolute;
+                top: 200px;
+                left: 610px;
+        }
+        
+        
+            p { display: block;
+                float: left;
+                width: 90px;
+                height: 90px;
+                margin: 10px 40px 10px;
+            }
+    
+    </style>
+	
+    <script src="jquery-2.1.4.js"></script>
+	
+	<script>
+	(function () {
+		var context = null;
+		var buffer = null;
+        
+       
+		
+		function addStatus(msg) {
+			jQuery("#status").append("<br/>" + msg);
+		};
+		
+
+        
+		window.onerror = function(errorMsg, url, lineNumber) {
+			addStatus("JAVASCRIPT ERROR: " + errorMsg + " (" + url + ", line " + lineNumber + ")");
+		};
+
+        
+		function decodeError() {
+			addStatus("Error in decodeAudioData");
+		};
+        
+        
+		jQuery(document).ready(function () {
+			
+            context = new webkitAudioContext();
+            addStatus("Created AudioContext");
+            
+                
+			$('div').each(function() {
+		        loadAudio(this);
+            });
+
+			
+			// AJAX request sound
+            
+			function loadAudio(object){
+            var url = $(object).data('sound');
+            var request = new XMLHttpRequest();
+			request.open("GET", url, true);
+			request.responseType = "arraybuffer";
+			request.onload = function () {
+				addStatus( url + " loaded, decoding...");
+				context.decodeAudioData(request.response, function (buffer_) {
+					addStatus("Finished decoding audio");
+					object.buffer = buffer_;
+				}, decodeError);
+			};
+			request.send();
+                
+            object.playSound = function() {
+            if (!object.buffer)
+				return;
+			
+			var source = context.createBufferSource();
+                source.buffer = object.buffer;
+                source.connect(context.destination);
+                source.noteOn(0);
+                }
+            
+            }
+            
+			
+			jQuery("#note1").on("touchstart", function() {
+					this.playSound();
+			});
+            
+            jQuery("#note2").on("touchstart",function() {
+                    this.playSound();	
+			});
+            
+            jQuery("#note3").on("touchstart",function() {
+                    this.playSound();	
+			});
+            
+            jQuery("#note4").on("touchstart", function() {
+					this.playSound();
+			});
+            
+            jQuery("#note5").on("touchstart",function() {
+                    this.playSound();	
+			});
+            
+            jQuery("#note6").on("touchstart",function() {
+                    this.playSound();	
+			});
+		});
+	})();
+	</script>
+</head>
+<body>
+    
+    <section id="notes"> 
+    <div id="note1" data-sound="sounds/A3_Amin.mp3">A3</div>
+    <div id="note2" data-sound="sounds/B3_Amin.mp3">B3</div>
+    <div id="note3" data-sound="sounds/C4_Amin.mp3">C4</div>
+    <div id="note4" data-sound="sounds/E4_Amin.mp3">E3</div>
+    <div id="note5" data-sound="sounds/F4_Amin.mp3">F4</div>
+    <div id="note6" data-sound="sounds/A4_Amin.mp3">A4</div>
+     
+     <p id="status">Status:</p>
+    <header>test 3 pentatonic</header>    
+    </section>
+    
+   
+</body>
+</html>
