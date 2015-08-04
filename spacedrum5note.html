@@ -6,11 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
     <style>
         
+        #status {display: none;}
         
+        header { margin: auto;}
         
         #notes { width: 1010px;
                 height: 660px;
-                border: 2px solid #ed9c9c;
+/*                border: 2px solid #ed9c9c;*/
                 background: #a07f7f url("images/6notes-play.png") no-repeat center center;
                 position: relative;
             } 
@@ -18,7 +20,7 @@
         
         div { width: 90px;
                 height: 90px;
-/*                background-color: #b681eb;*/
+/*              background-color: #b681eb;*/
                 margin: 10px 40px 10px;
 /*            display:  none;*/
 /*                display: block;*/
@@ -93,7 +95,7 @@
 
         
 		window.onerror = function(errorMsg, url, lineNumber) {
-			addStatus("JAVASCRIPT ERROR: " + errorMsg + " (" + url + ", line " + lineNumber + ")");
+//			addStatus("JAVASCRIPT ERROR: " + errorMsg + " (" + url + ", line " + lineNumber + ")");
 		};
 
         
@@ -105,7 +107,7 @@
 		jQuery(document).ready(function () {
 			
             context = new webkitAudioContext();
-            addStatus("Created AudioContext");
+//            addStatus("Created AudioContext");
             
                 
 			$('div').each(function() {
@@ -121,9 +123,9 @@
 			request.open("GET", url, true);
 			request.responseType = "arraybuffer";
 			request.onload = function () {
-				addStatus( url + " loaded, decoding...");
+//				addStatus( url + " loaded, decoding...");
 				context.decodeAudioData(request.response, function (buffer_) {
-					addStatus("Finished decoding audio");
+//					addStatus("Finished decoding audio");
 					object.buffer = buffer_;
 				}, decodeError);
 			};
@@ -180,7 +182,7 @@
     <div id="note6" data-sound="sounds/A4_Amin.mp3">&nbsp;</div>
      
      <p id="status">Status:</p>
-    <header>test 3 pentatonic</header>    
+    <header><h1>Spacedrum Pentatonic</h1></header>    
     </section>
     
    
