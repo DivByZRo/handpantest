@@ -1,0 +1,212 @@
+
+<!doctype html>
+<html>
+<head>
+	<title>3 notes based on Scirra test (v3)</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <style>
+        div { width: 90px;
+                height: 90px;
+                background-color: #b681eb;
+                margin: 10px 40px 10px;
+                display: block;
+                float: left;
+            }
+        
+            p { display: block;
+                float: left;
+                width: 90px;
+                height: 90px;
+                margin: 10px 40px 10px;
+
+            }
+    
+    </style>
+	
+    <script src="jquery-2.1.4.js"></script>
+	
+	<script>
+	(function () {
+		var context = null;
+		var buffer = null;
+        
+       
+		
+		function addStatus(msg) {
+			jQuery("#status").append("<br/>" + msg);
+		};
+		
+//        function addStatus2(msg) {
+//			jQuery("#status2").append("<br/>" + msg);
+//		};
+//        
+//         function addStatus3(msg) {
+//			jQuery("#status3").append("<br/>" + msg);
+//		};
+        
+		window.onerror = function(errorMsg, url, lineNumber) {
+			addStatus("JAVASCRIPT ERROR: " + errorMsg + " (" + url + ", line " + lineNumber + ")");
+		};
+        
+//		window.onerror2 = function(errorMsg, url, lineNumber) {
+//			addStatus2("JAVASCRIPT ERROR: " + errorMsg + " (" + url + ", line " + lineNumber + ")");
+//		};
+        
+        
+		function decodeError() {
+			addStatus("Error in decodeAudioData");
+		};
+		
+//        function decodeError2() {
+//			addStatus2("Error in decodeAudioData");
+//		};
+//        
+//        function decodeError3() {
+//			addStatus3("Error in decodeAudioData");
+//		};
+        
+        
+//		function playSound1(when_) {
+//            if (!buffer1)
+//				return;
+//			
+//			var source = context.createBufferSource();
+//			source.buffer = buffer1;
+//			source.connect(context.destination);
+//			source.noteOn(when_);
+//		};
+//		
+//        function playSound2(when_) {
+//			if (!buffer2)
+//				return;
+//			
+//			var source = context.createBufferSource();
+//			source.buffer = buffer2;
+//			source.connect(context.destination);
+//			source.noteOn(when_);
+//		};
+//        
+//         function playSound3(when_) {
+//			if (!buffer3)
+//				return;
+//			
+//			var source = context.createBufferSource();
+//			source.buffer = buffer3;
+//			source.connect(context.destination);
+//			source.noteOn(when_);
+//		};
+        
+        
+		jQuery(document).ready(function () {
+			
+            context = new webkitAudioContext();
+            addStatus("Created AudioContext");
+            
+                
+			$('div').each(function() {
+		        loadAudio(this);
+            });
+//            
+//            if (typeof AudioContext !== "undefined")
+//			{
+//				context = new AudioContext();
+//				addStatus1("Created AudioContext");
+//			}
+//			else if (typeof webkitAudioContext !== "undefined")
+//			{
+//				context = new webkitAudioContext();
+//				addStatus1("Created webkitAudioContext");
+//			}
+//			else
+//			{
+//				addStatus1("Web Audio API does not appear to be supported");
+//				return;
+//			}
+            
+			
+			// AJAX request sound
+            
+			function loadAudio(object){
+            var url = $(object).data('sound');
+            var request = new XMLHttpRequest();
+			request.open("GET", url, true);
+			request.responseType = "arraybuffer";
+			request.onload = function () {
+				addStatus( url + " loaded, decoding...");
+				context.decodeAudioData(request.response, function (buffer_) {
+					addStatus("Finished decoding audio");
+					object.buffer = buffer_;
+				}, decodeError);
+			};
+			request.send();
+                
+            object.playSound = function() {
+            if (!object.buffer)
+				return;
+			
+			var source = context.createBufferSource();
+                source.buffer = object.buffer;
+                source.connect(context.destination);
+                source.noteOn(0);
+                }
+            
+            }
+            
+//            var request2 = new XMLHttpRequest();
+//			request2.open("GET", "8notesDiatoAmV4B3.mp3", true);
+//			request2.responseType = "arraybuffer";
+//			request2.onload = function () {
+//				addStatus2("B3.mp3 loaded, decoding...");
+//				context.decodeAudioData(request2.response, function (buffer_) {
+//					addStatus2("Finished decoding audio");
+//					buffer2 = buffer_;
+//				}, decodeError2);
+//			};
+//			request2.send();
+//            
+//            var request3 = new XMLHttpRequest();
+//			request3.open("GET", "8notesDiatoAmV4A4.mp3", true);
+//			request3.responseType = "arraybuffer";
+//			request3.onload = function () {
+//				addStatus3("A4.mp3 loaded, decoding...");
+//				context.decodeAudioData(request3.response, function (buffer_) {
+//					addStatus3("Finished decoding audio");
+//					buffer3 = buffer_;
+//				}, decodeError3);
+//			};
+//			request3.send();
+            
+			
+			jQuery("#note1").on("touchstart", function() {
+					this.playSound();
+				
+			});
+            
+            jQuery("#note2").on("touchstart",function() {
+                    this.playSound();
+				
+			});
+            
+            jQuery("#note3").on("touchstart",function() {
+                    this.playSound();
+				
+			});
+            
+		});
+	})();
+	</script>
+</head>
+<body>
+<div id="note1" data-sound="8notesDiatoAmV4A3.mp3">A3</div>
+	
+    
+    <div id="note2" data-sound="8notesDiatoAmV4B3.mp3">B3</div>
+	
+    
+    <div id="note3" data-sound="8notesDiatoAmV4A4.mp3">A4</div>
+    <p id="status">Status:</p>
+    
+    
+    <header>test 1 refactor</header>
+</body>
+</html>
