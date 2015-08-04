@@ -97,10 +97,26 @@
         
 		jQuery(document).ready(function () {
 			
-				context = new AudioContext() || new webkitAudioContext();
-				addStatus1("Created AudioContext");
-                
+//				context = new AudioContext() || new webkitAudioContext();
+//				addStatus1("Created AudioContext");
+//                
 			
+            if (typeof AudioContext !== "undefined")
+			{
+				context = new AudioContext();
+				addStatus1("Created AudioContext");
+			}
+			else if (typeof webkitAudioContext !== "undefined")
+			{
+				context = new webkitAudioContext();
+				addStatus1("Created webkitAudioContext");
+			}
+			else
+			{
+				addStatus1("Web Audio API does not appear to be supported");
+				return;
+			}
+            
 			
 			// AJAX request sound
             
