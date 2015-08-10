@@ -2,9 +2,11 @@
 <!doctype html>
 <html>
 <head>
-	<title>A minor Pentatonic</title>
+	<title>A minor ? Pentatonic</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-	<link rel="stylesheet" type="text/css" href="style.css?v=1" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" type="text/css" href="style.css?v=1" />
     
     <script src="jquery-2.1.4.js"></script>
 	
@@ -31,7 +33,12 @@
 		};
         
         
-		jQuery(document).ready(function () {
+		jQuery(document).ready(function () {     
+
+	
+	// prevent scrolling?
+            
+	        document.addEventListener('touchmove', function(e){ e.preventDefault(); }, false);
 			
             context = new webkitAudioContext();
 //            addStatus("Created AudioContext");
