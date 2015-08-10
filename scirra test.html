@@ -1,0 +1,78 @@
+
+<!doctype html>
+<html>
+<head>
+	<title>iOS 6 Web Audio Scirra test (v3)</title>
+	<script src="jquery-1.7.1.min.js"></script>
+	
+	<script>
+	(function () {
+		var context = null;
+		var buffer = null;
+		
+		function addStatus(msg) {
+			jQuery("#status").append("<br/>" + msg);
+		};
+		
+		window.onerror = function(errorMsg, url, lineNumber) {
+			addStatus("JAVASCRIPT ERROR: " + errorMsg + " (" + url + ", line " + lineNumber + ")");
+		};
+		
+		function decodeError() {
+			addStatus("Error in decodeAudioData");
+		};
+		
+		function playSound(when_) {
+			if (!buffer)
+				return;
+			
+			var source = context.createBufferSource();
+			source.buffer = buffer;
+			source.connect(context.destination);
+			source.noteOn(when_);
+		};
+		
+		jQuery(document).ready(function () {
+			if (typeof AudioContext !== "undefined")
+			{
+				context = new AudioContext();
+				addStatus("Created AudioContext");
+			}
+			else if (typeof webkitAudioContext !== "undefined")
+			{
+				context = new webkitAudioContext();
+				addStatus("Created webkitAudioContext");
+			}
+			else
+			{
+				addStatus("Web Audio API does not appear to be supported");
+				return;
+			}
+			
+			// AJAX request sound.m4a
+			var request = new XMLHttpRequest();
+			request.open("GET", "sound.m4a", true);
+			request.responseType = "arraybuffer";
+			request.onload = function () {
+				addStatus("sound.m4a loaded, decoding...");
+				context.decodeAudioData(request.response, function (buffer_) {
+					addStatus("Finished decoding audio");
+					buffer = buffer_;
+				}, decodeError);
+			};
+			request.send();
+			
+			jQuery("#play").click(function() {
+				//setTimeout(1000, function() {
+					playSound(0);
+				//});
+			});
+		});
+	})();
+	</script>
+</head>
+<body>
+	<button id="play">noteOn(0)</button>
+	<p id="status">Status:</p>
+</body>
+</html>

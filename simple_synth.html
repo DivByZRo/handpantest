@@ -120,7 +120,7 @@
 		        addAudioProperties(this);
 		    });
             
-             $('#sp div').on('touchstart', function() {
+             $('#sp div').on('click', function() {
 		        this.play();
 		    });
 
@@ -178,7 +178,8 @@
 		}
 
 		function loadAudio(object, url) {
-		    var request = new XMLHttpRequest();
+		    
+            var request = new XMLHttpRequest();
 		    request.open('GET', url, true);
 		    request.responseType = 'arraybuffer';
 
@@ -247,8 +248,8 @@
 		            }
 		        }
 		        s.loop = object.loop;
-//		        s.start(0);
-                s.noteOn(0);
+		        s.start(0);
+               
 		        object.s = s;
 		    }
 

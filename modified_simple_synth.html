@@ -53,7 +53,7 @@
        
 		
         <section id="sp">
-			<div id="pad1"  data-sound="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409274kick.wav"></div>
+			<div id="pad1"  data-sound="8notesDiatoAmV4A3"></div>
 			<div id="pad2"  data-sound="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409275snare.wav"></div>
 			<div id="pad3"  data-sound="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409276tin.wav"></div>
 			<div id="pad4"  data-sound="http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409278hat.wav"></div>
@@ -117,10 +117,10 @@
 		<script>
            
             
-		var context = new AudioContext() ||  new webkitAudioContext(),
+		var context = new AudioContext() || new webkitAudioContext(),
 		    irHall = new reverbObject('http://dab1nmslvvntp.cloudfront.net/wp-content/uploads/2014/08/1407409273irHall.ogg');
  
-		$(function() {
+		(function() {
             
           
             
@@ -267,8 +267,8 @@
 		            }
 		        }
 		        s.loop = object.loop;
-//		        s.start(0);
-                s.noteOn(0); // ipad needs this method instead of start?
+		        s.start(0);
+//                s.noteOn(0); // ipad needs this method instead of start?
 		        object.s = s;
 		    }
 
